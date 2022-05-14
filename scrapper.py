@@ -59,16 +59,22 @@ def validate_tags_for_main():
     content = driver.find_element(By.TAG_NAME, 'main').text
     return content
 
-def extract_data(n):
+def create_folder():
     """
-    this function extracts data from websites and stores it in .docx files.
+    this function make a folders to save the data
     """
-    content = validate_tags_for_main()
     try:
         os.mkdir('save')
     except OSError as e:
         if e.errno != errno.EEXIST:
             raise
+
+def extract_data(n):
+    """
+    this function extracts data from websites and stores it in .docx files.
+    """
+    content = validate_tags_for_main()
+    create_folder()
     with (open('save/archive_{}.docx'.format(n), 'w')) as FILE:
         FILE.write(content)
 
