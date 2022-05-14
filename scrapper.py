@@ -41,15 +41,6 @@ def save_links():
     return data
 
 
-def validate_tags_for_div(one, two):
-    """
-    validate the tags
-    """
-    if one:
-        return one
-    elif two:
-        return two
-
 def validate_tags_for_main():
     """
     this function is in charge of validating the tags
