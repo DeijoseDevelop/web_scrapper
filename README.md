@@ -1,4 +1,4 @@
-# web_scrapper v0.5
+# web_scrapper v0.1
 
 ## steps to follow
 
