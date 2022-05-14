@@ -9,6 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 from pprint import pprint
+import os
+import errno
 
 
 variable = input('¿Que vas a investigar? >> ')
@@ -40,11 +42,33 @@ def save_links():
         data = [j.get_attribute('href') for j in links if validate_links(j)]
     return data
 
+
+def validate_tags_for_div(one, two):
+    """
+    validate the tags
+    """
+    if one:
+        return one
+    elif two:
+        return two
+
+def validate_tags_for_main():
+    """
+    this function is in charge of validating the tags
+    """
+    content = driver.find_element(By.TAG_NAME, 'main').text
+    return content
+
 def extract_data(n):
     """
     this function extracts data from websites and stores it in .docx files.
     """
-    content = driver.find_element(By.TAG_NAME, 'main').text
+    content = validate_tags_for_main()
+    try:
+        os.mkdir('save')
+    except OSError as e:
+        if e.errno != errno.EEXIST:
+            raise
     with (open('save/archive_{}.docx'.format(n), 'w')) as FILE:
         FILE.write(content)
 
